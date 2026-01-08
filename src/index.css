@@ -40,6 +40,17 @@ h1 {
   line-height: 1.1;
 }
 
+/* Hide scrollbar but keep scrolling */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;

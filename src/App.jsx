@@ -7,10 +7,8 @@ export default function App() {
   const [active, setActive] = useState(null);
   const sliderRef = useRef(null);
 
-  // 👉 APK stored locally inside public/apk folder
-  const APK_URL = "/apk/dev-streaks.apk";
+  const APK_URL = "/apk/Dev_Streaks.apk";
 
-  // --- Global Fixes + SEO + Favicon ---
   useEffect(() => {
     document.documentElement.style.overflowX = "hidden";
     document.body.style.overflowX = "hidden";
@@ -29,7 +27,8 @@ export default function App() {
     link.href = "/icon.png";
     document.head.appendChild(link);
 
-    return () => {
+
+return () => {
       document.head.removeChild(metaDesc);
       document.head.removeChild(link);
     };
@@ -146,7 +145,7 @@ export default function App() {
             </a>
 
             <a
-              href="https://github.com/ermadhav/L-G-tracker"
+              href="https://github.com/ermadhav/Dev_Streaks"
               target="_blank"
               className="px-6 py-3 rounded-2xl border border-zinc-700 hover:bg-zinc-800 transition"
             >
@@ -163,7 +162,7 @@ export default function App() {
           className="flex justify-center"
         >
           <div className="relative w-[260px] h-[520px] rounded-[36px] border border-zinc-700 bg-black shadow-2xl overflow-hidden">
-            <img src="/screenshots/home.jpg" className="w-full h-full object-cover" />
+            <img src="/screenshots/home.jpg" className="w-full h-full object-contain" />
           </div>
         </motion.div>
       </section>
@@ -207,16 +206,19 @@ export default function App() {
 
           <div
             ref={sliderRef}
-            className="flex gap-8 overflow-x-auto scrollbar-hide scroll-smooth px-6"
+            className="flex gap-10 overflow-x-scroll no-scrollbar scroll-smooth px-6 py-4"
           >
             {screenshots.map((src, i) => (
               <motion.div
                 key={i}
-                whileHover={{ scale: 1.05 }}
-                onClick={() => setActive(src)}
-                className="min-w-[220px] bg-zinc-900 rounded-2xl border border-zinc-800 shadow-xl overflow-hidden cursor-pointer"
+                whileHover={{ scale: 1.06 }}
+                
+                className="min-w-[240px] md:min-w-[280px] bg-zinc-900 rounded-3xl border border-zinc-800 shadow-2xl overflow-hidden"
               >
-                <img src={src} className="w-full h-[420px] object-cover" />
+                <img
+                  src={src}
+                  className="w-full h-[460px] md:h-[520px] object-contain bg-black"
+                />
               </motion.div>
             ))}
           </div>
@@ -228,37 +230,8 @@ export default function App() {
             <ChevronRight />
           </button>
         </div>
-
-        <p className="text-center text-zinc-500 mt-6">
-          Use arrows or swipe to browse • Click any screen to enlarge
-        </p>
       </section>
 
-      {/* Lightbox */}
-      <AnimatePresence>
-        {active && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/80 backdrop-blur flex items-center justify-center"
-          >
-            <button
-              onClick={() => setActive(null)}
-              className="absolute top-6 right-6 text-white"
-            >
-              <X size={28} />
-            </button>
-
-            <motion.img
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              src={active}
-              className="max-h-[85vh] rounded-xl shadow-2xl"
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* Footer */}
       <footer id="about" className="border-t border-zinc-800 py-12 text-center text-zinc-500">
