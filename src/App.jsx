@@ -19,7 +19,9 @@ export default function App() {
   const [open, setOpen] = useState(false);
   const sliderRef = useRef(null);
 
-  const APK_URL = "/apk/Dev_Streaks.apk";
+  // ✅ UPDATED APK LINK
+  const APK_URL =
+    "https://github.com/ermadhav/DS_Web/releases/download/v1.0.0/Dev_Streaks.apk";
 
   useEffect(() => {
     document.documentElement.style.overflowX = "hidden";
@@ -37,10 +39,10 @@ export default function App() {
     link.href = "/icon.png";
     document.head.appendChild(link);
 
-    return () => {
+    return(() => {
       document.head.removeChild(metaDesc);
       document.head.removeChild(link);
-    };
+    });
   }, []);
 
   const screenshots = [
