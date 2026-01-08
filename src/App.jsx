@@ -19,9 +19,12 @@ export default function App() {
   const [open, setOpen] = useState(false);
   const sliderRef = useRef(null);
 
-  // ✅ UPDATED APK LINK
+  // ✅ APK Download (GitHub Release)
   const APK_URL =
     "https://github.com/ermadhav/DS_Web/releases/download/v1.0.0/Dev_Streaks.apk";
+
+  // ✅ Asset helper (fixes Vercel path issues)
+  const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
 
   useEffect(() => {
     document.documentElement.style.overflowX = "hidden";
@@ -36,25 +39,26 @@ export default function App() {
 
     const link = document.createElement("link");
     link.rel = "icon";
-    link.href = "/icon.png";
+    link.href = asset("icon.png");
     document.head.appendChild(link);
 
-    return(() => {
+    return () => {
       document.head.removeChild(metaDesc);
       document.head.removeChild(link);
-    });
+    };
   }, []);
 
+  // ✅ Screenshots (production-safe)
   const screenshots = [
-    "/screenshots/home.jpg",
-    "/screenshots/login.jpg",
-    "/screenshots/signup.jpg",
-    "/screenshots/share.jpg",
-    "/screenshots/stat1.jpg",
-    "/screenshots/stat2.jpg",
-    "/screenshots/setting.jpg",
-    "/screenshots/repo1.jpg",
-    "/screenshots/repo2.jpg",
+    asset("screenshots/home.jpg"),
+    asset("screenshots/login.jpg"),
+    asset("screenshots/signup.jpg"),
+    asset("screenshots/share.jpg"),
+    asset("screenshots/stat1.jpg"),
+    asset("screenshots/stat2.jpg"),
+    asset("screenshots/setting.jpg"),
+    asset("screenshots/repo1.jpg"),
+    asset("screenshots/repo2.jpg"),
   ];
 
   const scroll = (direction) => {
@@ -77,7 +81,11 @@ export default function App() {
             {/* Logo */}
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg">
-                <img src="/icon.png" className="w-5 h-5" />
+                <img
+                  src={asset("icon.png")}
+                  onError={(e) => (e.currentTarget.src = asset("icon.png"))}
+                  className="w-5 h-5"
+                />
               </div>
               <span className="font-semibold tracking-wide text-lg">
                 Dev Streaks
@@ -92,7 +100,7 @@ export default function App() {
 
               <a
                 href={APK_URL}
-                download
+                target="_blank"
                 className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium hover:opacity-90 transition shadow-lg"
               >
                 <Download size={16} /> Download APK
@@ -120,7 +128,7 @@ export default function App() {
 
                 <a
                   href={APK_URL}
-                  download
+                  target="_blank"
                   className="flex justify-center items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium"
                 >
                   <Download size={16} /> Download APK
@@ -156,7 +164,7 @@ export default function App() {
 
             <a
               href={APK_URL}
-              download
+              target="_blank"
               className="px-6 py-3 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium transition flex items-center justify-center gap-2"
             >
               <Download size={18} /> Download APK
@@ -167,7 +175,11 @@ export default function App() {
         {/* Phone Mockup */}
         <motion.div className="flex justify-center">
           <div className="relative w-[240px] sm:w-[260px] h-[480px] sm:h-[520px] rounded-[36px] border border-zinc-700 bg-black shadow-2xl overflow-hidden">
-            <img src="/screenshots/home.jpg" className="w-full h-full object-contain" />
+            <img
+              src={asset("screenshots/home.jpg")}
+              onError={(e) => (e.currentTarget.src = asset("icon.png"))}
+              className="w-full h-full object-contain"
+            />
           </div>
         </motion.div>
       </section>
@@ -221,6 +233,7 @@ export default function App() {
               >
                 <img
                   src={src}
+                  onError={(e) => (e.currentTarget.src = asset("icon.png"))}
                   className="w-full h-[420px] sm:h-[480px] object-contain bg-black"
                 />
               </motion.div>
