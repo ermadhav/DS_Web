@@ -1,22 +1,21 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Github, BarChart3, Share2, Smartphone, Menu, X, Download } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Github, BarChart3, Share2, Smartphone, Menu, X, Download, ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 export default function App() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(null);
+  const sliderRef = useRef(null);
 
-  // 👉 Put your APK link here
-  const APK_URL = "https://your-domain.com/dev-streaks.apk"; // replace with real link
+  // 👉 APK stored locally inside public/apk folder
+  const APK_URL = "/apk/dev-streaks.apk";
 
   // --- Global Fixes + SEO + Favicon ---
   useEffect(() => {
-    // Prevent any horizontal overflow / blank space
     document.documentElement.style.overflowX = "hidden";
     document.body.style.overflowX = "hidden";
     document.documentElement.style.width = "100vw";
 
-    // SEO
     document.title = "Dev Streaks • Track GitHub & LeetCode Streaks";
 
     const metaDesc = document.createElement("meta");
@@ -25,7 +24,6 @@ export default function App() {
       "Dev Streaks helps developers track GitHub commits and LeetCode streaks with analytics, heatmaps, and profile sharing.";
     document.head.appendChild(metaDesc);
 
-    // Favicon (icon.png in public folder)
     const link = document.createElement("link");
     link.rel = "icon";
     link.href = "/icon.png";
@@ -38,9 +36,9 @@ export default function App() {
   }, []);
 
   const screenshots = [
-    "/screenshots/signup.jpg",
-    "/screenshots/login.jpg",
     "/screenshots/home.jpg",
+    "/screenshots/login.jpg",
+    "/screenshots/signup.jpg",
     "/screenshots/share.jpg",
     "/screenshots/stat1.jpg",
     "/screenshots/stat2.jpg",
@@ -49,13 +47,21 @@ export default function App() {
     "/screenshots/repo2.jpg",
   ];
 
+  const scroll = (direction) => {
+    if (!sliderRef.current) return;
+    const amount = 320;
+    sliderRef.current.scrollBy({
+      left: direction === "left" ? -amount : amount,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <div className="min-h-screen w-screen overflow-x-hidden scroll-smooth bg-gradient-to-br from-black via-zinc-900 to-black text-white">
       {/* Premium Navbar */}
       <nav className="fixed top-4 left-0 right-0 z-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="backdrop-blur-xl bg-zinc-900/70 border border-zinc-800 rounded-2xl px-6 h-16 flex items-center justify-between shadow-xl">
-            {/* Brand */}
             <div className="flex items-center gap-3">
               <div className="p-1.5 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg">
                 <img src="/icon.png" className="w-5 h-5" />
@@ -63,29 +69,25 @@ export default function App() {
               <span className="font-semibold tracking-wide">Dev Streaks</span>
             </div>
 
-            {/* Desktop Menu */}
             <div className="hidden md:flex items-center gap-8 text-sm text-zinc-300">
               <a href="#features" className="hover:text-white transition">Features</a>
               <a href="#preview" className="hover:text-white transition">Preview</a>
               <a href="#about" className="hover:text-white transition">About</a>
 
-              {/* Download Button */}
               <a
                 href={APK_URL}
-                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-sm font-medium hover:opacity-90 transition shadow-lg"
                 download
+                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-sm font-medium hover:opacity-90 transition shadow-lg"
               >
                 <Download size={16} /> Download APK
               </a>
             </div>
 
-            {/* Mobile Toggle */}
             <button onClick={() => setOpen(!open)} className="md:hidden">
               <Menu size={22} />
             </button>
           </div>
 
-          {/* Mobile Menu */}
           <AnimatePresence>
             {open && (
               <motion.div
@@ -100,8 +102,8 @@ export default function App() {
 
                 <a
                   href={APK_URL}
-                  className="flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium"
                   download
+                  className="flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium"
                 >
                   <Download size={16} /> Download APK
                 </a>
@@ -137,8 +139,8 @@ export default function App() {
 
             <a
               href={APK_URL}
-              className="px-6 py-3 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium hover:opacity-90 transition flex items-center gap-2"
               download
+              className="px-6 py-3 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium hover:opacity-90 transition flex items-center gap-2"
             >
               <Download size={18} /> Download APK
             </a>
@@ -191,38 +193,48 @@ export default function App() {
         </div>
       </section>
 
-      {/* Creative Screenshot Carousel */}
-      <section id="preview" className="relative py-28 overflow-hidden">
-        <h2 className="text-3xl font-semibold text-center mb-12">Live App Preview</h2>
+      {/* Screenshot Slider (Easy UX) */}
+      <section id="preview" className="relative py-28">
+        <h2 className="text-3xl font-semibold text-center mb-10">Live App Preview</h2>
 
-        <motion.div
-          className="flex gap-10 px-10 cursor-grab"
-          drag="x"
-          dragConstraints={{ left: -1200, right: 0 }}
-          whileTap={{ cursor: "grabbing" }}
-        >
-          {screenshots.map((src, i) => (
-            <motion.div
-              key={i}
-              whileHover={{ scale: 1.08, rotate: 1 }}
-              onClick={() => setActive(src)}
-              className="min-w-[220px] bg-zinc-900 rounded-2xl border border-zinc-800 shadow-xl overflow-hidden"
-            >
-              <img
-                src={src}
-                loading="lazy"
-                className="w-full h-[420px] object-cover"
-              />
-            </motion.div>
-          ))}
-        </motion.div>
+        <div className="relative max-w-6xl mx-auto px-10">
+          <button
+            onClick={() => scroll("left")}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-zinc-800 hover:bg-zinc-700"
+          >
+            <ChevronLeft />
+          </button>
+
+          <div
+            ref={sliderRef}
+            className="flex gap-8 overflow-x-auto scrollbar-hide scroll-smooth px-6"
+          >
+            {screenshots.map((src, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ scale: 1.05 }}
+                onClick={() => setActive(src)}
+                className="min-w-[220px] bg-zinc-900 rounded-2xl border border-zinc-800 shadow-xl overflow-hidden cursor-pointer"
+              >
+                <img src={src} className="w-full h-[420px] object-cover" />
+              </motion.div>
+            ))}
+          </div>
+
+          <button
+            onClick={() => scroll("right")}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-zinc-800 hover:bg-zinc-700"
+          >
+            <ChevronRight />
+          </button>
+        </div>
 
         <p className="text-center text-zinc-500 mt-6">
-          Drag to explore • Click any screen to enlarge
+          Use arrows or swipe to browse • Click any screen to enlarge
         </p>
       </section>
 
-      {/* Lightbox Modal */}
+      {/* Lightbox */}
       <AnimatePresence>
         {active && (
           <motion.div
@@ -239,9 +251,8 @@ export default function App() {
             </button>
 
             <motion.img
-              initial={{ scale: 0.85 }}
+              initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
-              exit={{ scale: 0.9 }}
               src={active}
               className="max-h-[85vh] rounded-xl shadow-2xl"
             />
