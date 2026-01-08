@@ -236,7 +236,9 @@ export default function App() {
 
       {/* ---------------- FOOTER ---------------- */}
       <footer id="about" className="border-t border-zinc-800 py-14 text-center">
-        <p className="text-zinc-400 mb-4">Made with ❤️ by Cosmo Coder</p>
+        <p className="text-zinc-400 mb-4">
+          Made with ❤️ by Cosmo Coder <span className="text-zinc-500">(AKA Madhav Tiwari)</span>
+        </p>
 
         <div className="flex justify-center gap-6 mb-4">
           <a href="https://github.com/ermadhav" target="_blank"><Github /></a>
