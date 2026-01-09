@@ -19,7 +19,7 @@ export default function App() {
   const [open, setOpen] = useState(false);
   const sliderRef = useRef(null);
 
-  // ✅ APK Download (GitHub Release)
+  // APK Download (GitHub Release)
   const APK_URL =
     "https://github.com/ermadhav/DS_Web/releases/download/v1.0.0/Dev_Streaks.apk";
 
