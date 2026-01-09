@@ -48,7 +48,7 @@ export default function App() {
     };
   }, []);
 
-  // ✅ Screenshots (production-safe)
+  //  Screenshots (production-safe)
   const screenshots = [
     asset("screenshots/home.jpg"),
     asset("screenshots/login.jpg"),
