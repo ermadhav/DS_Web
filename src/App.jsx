@@ -23,7 +23,7 @@ export default function App() {
   const APK_URL =
     "https://github.com/ermadhav/DS_Web/releases/download/v1.0.0/Dev_Streaks.apk";
 
-  // ✅ Asset helper (fixes Vercel path issues)
+  //  Asset helper (fixes Vercel path issues)
   const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
 
   useEffect(() => {
