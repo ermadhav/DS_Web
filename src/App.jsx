@@ -19,12 +19,35 @@ export default function App() {
   const [open, setOpen] = useState(false);
   const sliderRef = useRef(null);
 
-  // APK Download (GitHub Release)
+  // APK URL
   const APK_URL =
     "https://github.com/ermadhav/DS_Web/releases/download/v1.0.0/Dev_Streaks.apk";
 
-  //  Asset helper (fixes Vercel path issues)
+  // Asset helper
   const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
+
+  // ✅ ANDROID DOWNLOAD FIX (IMPORTANT)
+  const downloadAPK = async () => {
+    try {
+      const response = await fetch(APK_URL);
+      const blob = await response.blob();
+
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+
+      a.href = url;
+      a.download = "Dev_Streaks.apk";
+
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error("Download failed", err);
+      window.location.href = APK_URL;
+    }
+  };
 
   useEffect(() => {
     document.documentElement.style.overflowX = "hidden";
@@ -48,7 +71,6 @@ export default function App() {
     };
   }, []);
 
-  //  Screenshots (production-safe)
   const screenshots = [
     asset("screenshots/home.jpg"),
     asset("screenshots/login.jpg"),
@@ -73,12 +95,11 @@ export default function App() {
   return (
     <div className="min-h-screen w-screen overflow-x-hidden scroll-smooth bg-gradient-to-br from-black via-zinc-900 to-black text-white">
 
-      {/* ---------------- NAVBAR ---------------- */}
+      {/* NAVBAR */}
       <nav className="fixed top-4 inset-x-0 z-50 px-4">
         <div className="max-w-7xl mx-auto backdrop-blur-xl bg-zinc-900/80 border border-zinc-800 rounded-2xl shadow-2xl">
           <div className="flex items-center justify-between px-5 h-16">
 
-            {/* Logo */}
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg">
                 <img
@@ -92,28 +113,25 @@ export default function App() {
               </span>
             </div>
 
-            {/* Desktop Menu */}
             <div className="hidden md:flex items-center gap-8 text-sm text-zinc-300">
               <a href="#features" className="hover:text-white transition">Features</a>
               <a href="#preview" className="hover:text-white transition">Preview</a>
               <a href="#about" className="hover:text-white transition">About</a>
 
-              <a
-                href={APK_URL}
-                target="_blank"
+              {/* ✅ FIXED DOWNLOAD */}
+              <button
+                onClick={downloadAPK}
                 className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium hover:opacity-90 transition shadow-lg"
               >
                 <Download size={16} /> Download APK
-              </a>
+              </button>
             </div>
 
-            {/* Mobile Button */}
             <button onClick={() => setOpen(!open)} className="md:hidden">
               {open ? <X /> : <Menu />}
             </button>
           </div>
 
-          {/* Mobile Menu */}
           <AnimatePresence>
             {open && (
               <motion.div
@@ -126,20 +144,20 @@ export default function App() {
                 <a href="#preview" onClick={() => setOpen(false)}>Preview</a>
                 <a href="#about" onClick={() => setOpen(false)}>About</a>
 
-                <a
-                  href={APK_URL}
-                  target="_blank"
+                {/* ✅ FIXED DOWNLOAD */}
+                <button
+                  onClick={downloadAPK}
                   className="flex justify-center items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium"
                 >
                   <Download size={16} /> Download APK
-                </a>
+                </button>
               </motion.div>
             )}
           </AnimatePresence>
         </div>
       </nav>
 
-      {/* ---------------- HERO ---------------- */}
+      {/* HERO */}
       <section className="pt-36 pb-24 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
         <div className="text-center md:text-left">
           <motion.h1
@@ -162,17 +180,16 @@ export default function App() {
               View App
             </a>
 
-            <a
-              href={APK_URL}
-              target="_blank"
+            {/* ✅ FIXED DOWNLOAD */}
+            <button
+              onClick={downloadAPK}
               className="px-6 py-3 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium transition flex items-center justify-center gap-2"
             >
               <Download size={18} /> Download APK
-            </a>
+            </button>
           </div>
         </div>
 
-        {/* Phone Mockup */}
         <motion.div className="flex justify-center">
           <div className="relative w-[240px] sm:w-[260px] h-[480px] sm:h-[520px] rounded-[36px] border border-zinc-700 bg-black shadow-2xl overflow-hidden">
             <img
@@ -184,7 +201,7 @@ export default function App() {
         </motion.div>
       </section>
 
-      {/* ---------------- FEATURES ---------------- */}
+      {/* FEATURES */}
       <section id="features" className="max-w-7xl mx-auto px-6 py-20">
         <h2 className="text-3xl font-semibold text-center mb-14">Features</h2>
 
@@ -209,7 +226,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* ---------------- PREVIEW ---------------- */}
+      {/* PREVIEW */}
       <section id="preview" className="relative py-24">
         <h2 className="text-3xl font-semibold text-center mb-10">Live App Preview</h2>
 
@@ -249,7 +266,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* ---------------- FOOTER ---------------- */}
+      {/* FOOTER */}
       <footer id="about" className="border-t border-zinc-800 py-14 text-center">
         <p className="text-zinc-400 mb-4">
           Made with ❤️ by Cosmo Coder <span className="text-zinc-500">(AKA Madhav Tiwari)</span>
