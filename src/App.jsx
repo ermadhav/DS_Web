@@ -14,6 +14,7 @@ import {
   Code,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function App() {
   const [open, setOpen] = useState(false);
@@ -281,6 +282,7 @@ export default function App() {
 
         <p className="text-xs text-zinc-500">Expo • React Native • React Web</p>
       </footer>
+      <Analytics />
     </div>
   );
 }
