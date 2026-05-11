@@ -214,49 +214,58 @@ export default function App() {
 
       {/* FEATURES */}
       <section id="features" className="max-w-7xl mx-auto px-6 py-20">
-        <h2 className="text-3xl font-semibold text-center mb-14">Features</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-14">
+          Features
+        </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {[
             {
               icon: Github,
               title: "GitHub Tracking",
-              desc: "Commit streaks, heatmaps, repositories.",
+              desc: "Track commit streaks, contribution heatmaps, and repositories.",
             },
             {
               icon: Code,
               title: "LeetCode Tracking",
-              desc: "Solve streaks, difficulty stats, submissions.",
+              desc: "Monitor solved problems, streaks, difficulty stats, and submissions.",
             },
             {
               icon: BarChart3,
               title: "Analytics",
-              desc: "Weekly stats and consistency insights.",
+              desc: "Get weekly insights and consistency analytics for your coding journey.",
             },
             {
               icon: Share2,
               title: "Profile Sharing",
-              desc: "QR code sharing for profiles.",
+              desc: "Share your profile instantly using QR codes.",
             },
             {
               icon: Smartphone,
               title: "Mobile First",
-              desc: "Optimized for mobile experience.",
+              desc: "Designed for a smooth and responsive mobile experience.",
             },
             {
               icon: Bell,
               title: "Smart Reminders",
-              desc: "Custom reminders from 12 PM–11 PM with 30m, 45m, 1h, or 2h intervals.",
+              desc: "Set custom reminders from 12 PM to 11 PM with flexible intervals.",
             },
           ].map((f, i) => (
             <motion.div
               key={i}
-              whileHover={{ scale: 1.05 }}
-              className="bg-zinc-900 rounded-2xl border border-zinc-800 shadow-xl p-6 text-center"
+              whileHover={{ scale: 1.04, y: -5 }}
+              transition={{ duration: 0.2 }}
+              className="bg-zinc-900 rounded-3xl border border-zinc-800 shadow-xl p-8 text-center min-h-[280px] flex flex-col items-center justify-start"
             >
-              <f.icon size={36} className="mx-auto mb-4" />
-              <h3 className="font-semibold text-lg mb-2">{f.title}</h3>
-              <p className="text-zinc-400 text-sm">{f.desc}</p>
+              <f.icon size={42} className="mb-5 text-white" />
+
+              <h3 className="font-semibold text-2xl mb-4 leading-snug">
+                {f.title}
+              </h3>
+
+              <p className="text-zinc-400 text-base leading-relaxed max-w-[260px]">
+                {f.desc}
+              </p>
             </motion.div>
           ))}
         </div>
@@ -313,7 +322,11 @@ export default function App() {
         </p>
 
         <div className="flex justify-center gap-6 mb-4">
-          <a href="https://github.com/ermadhav" target="_blank" rel="noreferrer">
+          <a
+            href="https://github.com/ermadhav"
+            target="_blank"
+            rel="noreferrer"
+          >
             <Github />
           </a>
           <a
@@ -323,7 +336,11 @@ export default function App() {
           >
             <Linkedin />
           </a>
-          <a href="https://twitter.com/madhavtiwari24" target="_blank" rel="noreferrer">
+          <a
+            href="https://twitter.com/madhavtiwari24"
+            target="_blank"
+            rel="noreferrer"
+          >
             <X />
           </a>
           <a
