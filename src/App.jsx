@@ -28,13 +28,13 @@ export default function App() {
 
   // FIXED DOWNLOAD FUNCTION
   const downloadAPK = () => {
-  const a = document.createElement("a");
-  a.href = APK_URL;
-  a.download = "Dev_Streaks.apk";
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-};
+    const a = document.createElement("a");
+    a.href = APK_URL;
+    a.download = "Dev_Streaks.apk";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  };
 
   useEffect(() => {
     document.documentElement.style.overflowX = "hidden";
@@ -67,7 +67,6 @@ export default function App() {
     asset("screenshots/repo1.jpeg"),
     asset("screenshots/setting.jpeg"),
     asset("screenshots/widget.jpeg"),
-
   ];
 
   const scroll = (direction) => {
@@ -204,66 +203,66 @@ export default function App() {
       </section>
 
       {/* FEATURES */}
-<section id="features" className="max-w-7xl mx-auto px-6 py-20">
-  <h2 className="text-3xl md:text-4xl font-bold text-center mb-14">
-    Features
-  </h2>
+      <section id="features" className="max-w-7xl mx-auto px-6 py-20">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-14">
+          Features
+        </h2>
 
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-    {[
-      {
-        icon: Github,
-        title: "GitHub Tracking",
-        desc: "Track commit streaks, contribution heatmaps, and repositories.",
-      },
-      {
-        icon: Code,
-        title: "LeetCode Tracking",
-        desc: "Monitor solved problems, streaks, difficulty stats, and submissions.",
-      },
-      {
-        icon: Globe,
-        title: "Heatmap Widget",
-        desc: "Add GitHub & LeetCode heatmap widgets directly to your home screen.",
-      },
-      {
-        icon: Bell,
-        title: "Smart Reminders",
-        desc: "Set custom reminders from 12 PM to 11 PM with flexible intervals.",
-      },
-      {
-        icon: BarChart3,
-        title: "Analytics",
-        desc: "Get weekly insights and consistency analytics for your coding journey.",
-      },
-      {
-        icon: Share2,
-        title: "Profile Sharing",
-        desc: "Share your profile instantly using QR codes.",
-      },
-      {
-        icon: Smartphone,
-        title: "Mobile First",
-        desc: "Designed for a smooth and responsive mobile experience.",
-      },
-    ].map((f, i) => (
-      <motion.div
-        key={i}
-        whileHover={{ scale: 1.04, y: -5 }}
-        transition={{ duration: 0.2 }}
-        className="bg-zinc-900 rounded-3xl border border-zinc-800 shadow-xl p-8 text-center min-h-[280px] flex flex-col items-center justify-start"
-      >
-        <f.icon size={42} className="mb-5 text-white" />
-        <h3 className="font-semibold text-2xl mb-4 leading-snug">
-          {f.title}
-        </h3>
-        <p className="text-zinc-400 text-base leading-relaxed max-w-[260px]">
-          {f.desc}
-        </p>
-      </motion.div>
-    ))}
-  </div>
-</section>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          {[
+            {
+              icon: Github,
+              title: "GitHub Tracking",
+              desc: "Track commit streaks, contribution heatmaps, and repositories.",
+            },
+            {
+              icon: Code,
+              title: "LeetCode Tracking",
+              desc: "Monitor solved problems, streaks, difficulty stats, and submissions.",
+            },
+            {
+              icon: Globe,
+              title: "Heatmap Widget",
+              desc: "Add GitHub & LeetCode heatmap widgets directly to your home screen.",
+            },
+            {
+              icon: Bell,
+              title: "Smart Reminders",
+              desc: "Set custom reminders from 12 PM to 11 PM with flexible intervals.",
+            },
+            {
+              icon: BarChart3,
+              title: "Analytics",
+              desc: "Get weekly insights and consistency analytics for your coding journey.",
+            },
+            {
+              icon: Share2,
+              title: "Profile Sharing",
+              desc: "Share your profile instantly using QR codes.",
+            },
+            {
+              icon: Smartphone,
+              title: "Mobile First",
+              desc: "Designed for a smooth and responsive mobile experience.",
+            },
+          ].map((f, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ scale: 1.04, y: -5 }}
+              transition={{ duration: 0.2 }}
+              className="bg-zinc-900 rounded-3xl border border-zinc-800 shadow-xl p-8 text-center min-h-[280px] flex flex-col items-center justify-start"
+            >
+              <f.icon size={42} className="mb-5 text-white" />
+              <h3 className="font-semibold text-2xl mb-4 leading-snug">
+                {f.title}
+              </h3>
+              <p className="text-zinc-400 text-base leading-relaxed max-w-[260px]">
+                {f.desc}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
 
       {/* PREVIEW */}
       <section id="preview" className="relative py-24">
@@ -311,31 +310,82 @@ export default function App() {
       {/* FOOTER */}
       <footer id="about" className="border-t border-zinc-800 py-16">
         <div className="max-w-4xl mx-auto px-6 text-center">
+          {/* Name */}
           <p className="text-zinc-300 text-lg mb-6">
             Made with ❤️ by{" "}
             <span className="font-semibold text-white">Cosmo Coder</span>{" "}
             <span className="text-zinc-500">(AKA Madhav Tiwari)</span>
           </p>
 
+          {/* Contact Buttons */}
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
+            {/* Email */}
             <a
               href="mailto:contact.madhavtiwari@gmail.com"
               className="inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-zinc-900 border border-zinc-800 hover:border-indigo-500 hover:bg-zinc-800 transition-all duration-300 group"
             >
-              <Mail size={18} />
-              <span>contact.madhavtiwari@gmail.com</span>
+              <Mail
+                size={18}
+                className="text-zinc-400 group-hover:text-indigo-400 transition"
+              />
+              <span className="text-zinc-300 group-hover:text-white text-sm sm:text-base font-medium">
+                contact.madhavtiwari@gmail.com
+              </span>
             </a>
 
+            {/* Portfolio */}
             <a
               href="https://madhavtiwari.xyz"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-zinc-900 border border-zinc-800 hover:border-purple-500 hover:bg-zinc-800 transition-all duration-300 group"
             >
-              <Globe size={18} />
-              <span>madhavtiwari.xyz</span>
+              <Globe
+                size={18}
+                className="text-zinc-400 group-hover:text-purple-400 transition"
+              />
+              <span className="text-zinc-300 group-hover:text-white text-sm sm:text-base font-medium">
+                madhavtiwari.xyz
+              </span>
             </a>
           </div>
+
+          {/* Social Icons */}
+          <div className="flex justify-center gap-6 mb-8">
+            {[
+              {
+                icon: Github,
+                href: "https://github.com/ermadhav",
+              },
+              {
+                icon: Linkedin,
+                href: "https://www.linkedin.com/in/ermadhav/",
+              },
+              {
+                icon: X,
+                href: "https://twitter.com/madhavtiwari24",
+              },
+              {
+                icon: Instagram,
+                href: "https://www.instagram.com/madhav.tiwari24/",
+              },
+            ].map((social, i) => (
+              <a
+                key={i}
+                href={social.href}
+                target="_blank"
+                rel="noreferrer"
+                className="w-12 h-12 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white hover:border-indigo-500 hover:bg-zinc-800 transition-all duration-300"
+              >
+                <social.icon size={22} />
+              </a>
+            ))}
+          </div>
+
+          {/* Tech Stack */}
+          <p className="text-sm text-zinc-500 tracking-wide">
+            Built with Expo • React Native • React Web
+          </p>
         </div>
       </footer>
     </div>
