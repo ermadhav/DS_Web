@@ -13,6 +13,7 @@ import {
   Instagram,
   Code,
   Bell,
+  Mail,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
@@ -231,6 +232,11 @@ export default function App() {
               desc: "Monitor solved problems, streaks, difficulty stats, and submissions.",
             },
             {
+              icon: Bell,
+              title: "Smart Reminders",
+              desc: "Set custom reminders from 12 PM to 11 PM with flexible intervals.",
+            },
+            {
               icon: BarChart3,
               title: "Analytics",
               desc: "Get weekly insights and consistency analytics for your coding journey.",
@@ -245,11 +251,7 @@ export default function App() {
               title: "Mobile First",
               desc: "Designed for a smooth and responsive mobile experience.",
             },
-            {
-              icon: Bell,
-              title: "Smart Reminders",
-              desc: "Set custom reminders from 12 PM to 11 PM with flexible intervals.",
-            },
+            
           ].map((f, i) => (
             <motion.div
               key={i}
@@ -315,45 +317,64 @@ export default function App() {
       </section>
 
       {/* FOOTER */}
-      <footer id="about" className="border-t border-zinc-800 py-14 text-center">
-        <p className="text-zinc-400 mb-4">
-          Made with ❤️ by Cosmo Coder{" "}
-          <span className="text-zinc-500">(AKA Madhav Tiwari)</span>
-        </p>
+<footer id="about" className="border-t border-zinc-800 py-14 text-center">
+  <p className="text-zinc-400 mb-4">
+    Made with ❤️ by Cosmo Coder{" "}
+    <span className="text-zinc-500">(AKA Madhav Tiwari)</span>
+  </p>
 
-        <div className="flex justify-center gap-6 mb-4">
-          <a
-            href="https://github.com/ermadhav"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Github />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/ermadhav/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Linkedin />
-          </a>
-          <a
-            href="https://twitter.com/madhavtiwari24"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <X />
-          </a>
-          <a
-            href="https://www.instagram.com/madhav.tiwari24/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Instagram />
-          </a>
-        </div>
+  {/* Email */}
+  <div className="flex justify-center items-center gap-2 mb-6 text-zinc-400">
+    <Mail size={18} />
+    <a
+      href="mailto:your-email@example.com"
+      className="hover:text-white transition"
+    >
+      your-email@example.com
+    </a>
+  </div>
 
-        <p className="text-xs text-zinc-500">Expo • React Native • React Web</p>
-      </footer>
+  {/* Social Links */}
+  <div className="flex justify-center gap-6 mb-4">
+    <a
+      href="https://github.com/ermadhav"
+      target="_blank"
+      rel="noreferrer"
+      className="hover:text-white transition"
+    >
+      <Github />
+    </a>
+
+    <a
+      href="https://www.linkedin.com/in/ermadhav/"
+      target="_blank"
+      rel="noreferrer"
+      className="hover:text-white transition"
+    >
+      <Linkedin />
+    </a>
+
+    <a
+      href="https://twitter.com/madhavtiwari24"
+      target="_blank"
+      rel="noreferrer"
+      className="hover:text-white transition"
+    >
+      <X />
+    </a>
+
+    <a
+      href="https://www.instagram.com/madhav.tiwari24/"
+      target="_blank"
+      rel="noreferrer"
+      className="hover:text-white transition"
+    >
+      <Instagram />
+    </a>
+  </div>
+
+  <p className="text-xs text-zinc-500">Expo • React Native • React Web</p>
+</footer>
     </div>
   );
 }
