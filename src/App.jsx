@@ -317,63 +317,67 @@ export default function App() {
       </section>
 
       {/* FOOTER */}
-<footer id="about" className="border-t border-zinc-800 py-14 text-center">
-  <p className="text-zinc-400 mb-4">
-    Made with ❤️ by Cosmo Coder{" "}
-    <span className="text-zinc-500">(AKA Madhav Tiwari)</span>
-  </p>
+<footer id="about" className="border-t border-zinc-800 py-16">
+  <div className="max-w-4xl mx-auto px-6 text-center">
+    
+    {/* Name */}
+    <p className="text-zinc-300 text-lg mb-6">
+      Made with ❤️ by{" "}
+      <span className="font-semibold text-white">Cosmo Coder</span>{" "}
+      <span className="text-zinc-500">(AKA Madhav Tiwari)</span>
+    </p>
 
-  {/* Email */}
-  <div className="flex justify-center items-center gap-2 mb-6 text-zinc-400">
-    <Mail size={18} />
+    {/* Email */}
     <a
-      href="mailto:your-email@example.com"
-      className="hover:text-white transition"
+      href="mailto:contact.madhavtiwari@gmail.com"
+      className="inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-zinc-900 border border-zinc-800 hover:border-indigo-500 hover:bg-zinc-800 transition-all duration-300 mb-8 group"
     >
-      your-email@example.com
+      <Mail
+        size={18}
+        className="text-zinc-400 group-hover:text-indigo-400 transition"
+      />
+      <span className="text-zinc-300 group-hover:text-white text-sm sm:text-base font-medium">
+        contact.madhavtiwari@gmail.com
+      </span>
     </a>
+
+    {/* Social Icons */}
+    <div className="flex justify-center gap-6 mb-8">
+      {[
+        {
+          icon: Github,
+          href: "https://github.com/ermadhav",
+        },
+        {
+          icon: Linkedin,
+          href: "https://www.linkedin.com/in/ermadhav/",
+        },
+        {
+          icon: X,
+          href: "https://twitter.com/madhavtiwari24",
+        },
+        {
+          icon: Instagram,
+          href: "https://www.instagram.com/madhav.tiwari24/",
+        },
+      ].map((social, i) => (
+        <a
+          key={i}
+          href={social.href}
+          target="_blank"
+          rel="noreferrer"
+          className="w-12 h-12 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white hover:border-indigo-500 hover:bg-zinc-800 transition-all duration-300"
+        >
+          <social.icon size={22} />
+        </a>
+      ))}
+    </div>
+
+    {/* Tech Stack */}
+    <p className="text-sm text-zinc-500 tracking-wide">
+      Built with Expo • React Native • React Web
+    </p>
   </div>
-
-  {/* Social Links */}
-  <div className="flex justify-center gap-6 mb-4">
-    <a
-      href="https://github.com/ermadhav"
-      target="_blank"
-      rel="noreferrer"
-      className="hover:text-white transition"
-    >
-      <Github />
-    </a>
-
-    <a
-      href="https://www.linkedin.com/in/ermadhav/"
-      target="_blank"
-      rel="noreferrer"
-      className="hover:text-white transition"
-    >
-      <Linkedin />
-    </a>
-
-    <a
-      href="https://twitter.com/madhavtiwari24"
-      target="_blank"
-      rel="noreferrer"
-      className="hover:text-white transition"
-    >
-      <X />
-    </a>
-
-    <a
-      href="https://www.instagram.com/madhav.tiwari24/"
-      target="_blank"
-      rel="noreferrer"
-      className="hover:text-white transition"
-    >
-      <Instagram />
-    </a>
-  </div>
-
-  <p className="text-xs text-zinc-500">Expo • React Native • React Web</p>
 </footer>
     </div>
   );
