@@ -1,0 +1,7 @@
+# Dev Streaks — robots.txt
+User-agent: *
+Allow: /
+Disallow: /Dev_Streaks.apk
+Disallow: /assets/
+
+Sitemap: https://www.devstreaks.site/sitemap.xml

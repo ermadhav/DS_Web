@@ -17,6 +17,16 @@ import {
   Globe,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import {
+  initAnalytics,
+  trackAPKDownload,
+  trackCTAClick,
+  trackNavClick,
+  trackSocialClick,
+  trackScreenshotScroll,
+  trackFeatureHover,
+  trackContactClick,
+} from "./analytics";
 
 export default function App() {
   const [open, setOpen] = useState(false);
@@ -26,8 +36,9 @@ export default function App() {
 
   const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
 
-  // FIXED DOWNLOAD FUNCTION
-  const downloadAPK = () => {
+  // APK download with conversion tracking
+  const downloadAPK = (source = "unknown") => {
+    trackAPKDownload(source);
     const a = document.createElement("a");
     a.href = APK_URL;
     a.download = "Dev_Streaks.apk";
@@ -39,22 +50,12 @@ export default function App() {
   useEffect(() => {
     document.documentElement.style.overflowX = "hidden";
     document.body.style.overflowX = "hidden";
-    document.title = "Dev Streaks • Track GitHub & LeetCode Streaks";
 
-    const metaDesc = document.createElement("meta");
-    metaDesc.name = "description";
-    metaDesc.content =
-      "Dev Streaks helps developers track GitHub commits and LeetCode streaks with analytics, heatmaps, and profile sharing.";
-    document.head.appendChild(metaDesc);
-
-    const link = document.createElement("link");
-    link.rel = "icon";
-    link.href = asset("icon.png");
-    document.head.appendChild(link);
+    // Initialize GA4, Clarity, scroll & session tracking
+    const cleanupAnalytics = initAnalytics();
 
     return () => {
-      document.head.removeChild(metaDesc);
-      document.head.removeChild(link);
+      cleanupAnalytics();
     };
   }, []);
 
@@ -72,6 +73,8 @@ export default function App() {
   const scroll = (direction) => {
     if (!sliderRef.current) return;
     const amount = window.innerWidth < 640 ? 240 : 320;
+
+    trackScreenshotScroll(direction);
 
     sliderRef.current.scrollBy({
       left: direction === "left" ? -amount : amount,
@@ -101,18 +104,30 @@ export default function App() {
             </div>
 
             <div className="hidden md:flex items-center gap-8 text-sm text-zinc-300">
-              <a href="#features" className="hover:text-white transition">
+              <a
+                href="#features"
+                className="hover:text-white transition"
+                onClick={() => trackNavClick("features")}
+              >
                 Features
               </a>
-              <a href="#preview" className="hover:text-white transition">
+              <a
+                href="#preview"
+                className="hover:text-white transition"
+                onClick={() => trackNavClick("preview")}
+              >
                 Preview
               </a>
-              <a href="#about" className="hover:text-white transition">
+              <a
+                href="#about"
+                className="hover:text-white transition"
+                onClick={() => trackNavClick("about")}
+              >
                 About
               </a>
 
               <button
-                onClick={downloadAPK}
+                onClick={() => downloadAPK("navbar")}
                 className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium hover:opacity-90 transition shadow-lg"
               >
                 <Download size={16} />
@@ -133,18 +148,36 @@ export default function App() {
                 exit={{ opacity: 0, y: -10 }}
                 className="md:hidden px-5 pb-5 flex flex-col gap-4"
               >
-                <a href="#features" onClick={() => setOpen(false)}>
+                <a
+                  href="#features"
+                  onClick={() => {
+                    setOpen(false);
+                    trackNavClick("features_mobile");
+                  }}
+                >
                   Features
                 </a>
-                <a href="#preview" onClick={() => setOpen(false)}>
+                <a
+                  href="#preview"
+                  onClick={() => {
+                    setOpen(false);
+                    trackNavClick("preview_mobile");
+                  }}
+                >
                   Preview
                 </a>
-                <a href="#about" onClick={() => setOpen(false)}>
+                <a
+                  href="#about"
+                  onClick={() => {
+                    setOpen(false);
+                    trackNavClick("about_mobile");
+                  }}
+                >
                   About
                 </a>
 
                 <button
-                  onClick={downloadAPK}
+                  onClick={() => downloadAPK("mobile_menu")}
                   className="flex justify-center items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium"
                 >
                   <Download size={16} />
@@ -176,12 +209,13 @@ export default function App() {
             <a
               href="#preview"
               className="px-6 py-3 rounded-2xl bg-white text-black font-medium hover:scale-105 transition text-center"
+              onClick={() => trackCTAClick("view_app", "hero")}
             >
               View App
             </a>
 
             <button
-              onClick={downloadAPK}
+              onClick={() => downloadAPK("hero")}
               className="px-6 py-3 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium transition flex items-center justify-center gap-2"
             >
               <Download size={18} />
@@ -196,7 +230,8 @@ export default function App() {
               src={asset("screenshots/home.jpeg")}
               onError={(e) => (e.currentTarget.src = asset("icon.png"))}
               className="w-full h-full object-contain"
-              alt="App Preview"
+              alt="Dev Streaks app home screen showing GitHub and LeetCode streak tracking"
+              loading="eager"
             />
           </div>
         </motion.div>
@@ -251,6 +286,7 @@ export default function App() {
               whileHover={{ scale: 1.04, y: -5 }}
               transition={{ duration: 0.2 }}
               className="bg-zinc-900 rounded-3xl border border-zinc-800 shadow-xl p-8 text-center min-h-[280px] flex flex-col items-center justify-start"
+              onMouseEnter={() => trackFeatureHover(f.title)}
             >
               <f.icon size={42} className="mb-5 text-white" />
               <h3 className="font-semibold text-2xl mb-4 leading-snug">
@@ -274,6 +310,7 @@ export default function App() {
           <button
             onClick={() => scroll("left")}
             className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-zinc-800 hover:bg-zinc-700"
+            aria-label="Scroll screenshots left"
           >
             <ChevronLeft />
           </button>
@@ -292,7 +329,8 @@ export default function App() {
                   src={src}
                   onError={(e) => (e.currentTarget.src = asset("icon.png"))}
                   className="w-full h-[450px] sm:h-[520px] object-contain bg-black"
-                  alt={`Screenshot ${i + 1}`}
+                  alt={`Dev Streaks app screenshot ${i + 1}`}
+                  loading="lazy"
                 />
               </motion.div>
             ))}
@@ -301,6 +339,7 @@ export default function App() {
           <button
             onClick={() => scroll("right")}
             className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-zinc-800 hover:bg-zinc-700"
+            aria-label="Scroll screenshots right"
           >
             <ChevronRight />
           </button>
@@ -323,6 +362,9 @@ export default function App() {
             <a
               href="mailto:contact.madhavtiwari@gmail.com"
               className="inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-zinc-900 border border-zinc-800 hover:border-indigo-500 hover:bg-zinc-800 transition-all duration-300 group"
+              onClick={() =>
+                trackContactClick("email", "contact.madhavtiwari@gmail.com")
+              }
             >
               <Mail
                 size={18}
@@ -339,6 +381,9 @@ export default function App() {
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-zinc-900 border border-zinc-800 hover:border-purple-500 hover:bg-zinc-800 transition-all duration-300 group"
+              onClick={() =>
+                trackContactClick("portfolio", "madhavtiwari.xyz")
+              }
             >
               <Globe
                 size={18}
@@ -356,18 +401,22 @@ export default function App() {
               {
                 icon: Github,
                 href: "https://github.com/ermadhav",
+                name: "github",
               },
               {
                 icon: Linkedin,
                 href: "https://www.linkedin.com/in/ermadhav/",
+                name: "linkedin",
               },
               {
                 icon: X,
                 href: "https://twitter.com/madhavtiwari24",
+                name: "twitter",
               },
               {
                 icon: Instagram,
                 href: "https://www.instagram.com/madhav.tiwari24/",
+                name: "instagram",
               },
             ].map((social, i) => (
               <a
@@ -376,6 +425,8 @@ export default function App() {
                 target="_blank"
                 rel="noreferrer"
                 className="w-12 h-12 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white hover:border-indigo-500 hover:bg-zinc-800 transition-all duration-300"
+                onClick={() => trackSocialClick(social.name)}
+                aria-label={`Visit ${social.name}`}
               >
                 <social.icon size={22} />
               </a>
