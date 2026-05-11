@@ -27,26 +27,9 @@ export default function App() {
 
   const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
 
-  const downloadAPK = async () => {
-    try {
-      const response = await fetch(APK_URL);
-      const blob = await response.blob();
-
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-
-      a.href = url;
-      a.download = "Dev_Streaks.apk";
-
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-
-      window.URL.revokeObjectURL(url);
-    } catch (err) {
-      console.error("Download failed", err);
-      window.location.href = APK_URL;
-    }
+  // FIXED DOWNLOAD FUNCTION
+  const downloadAPK = () => {
+    window.open(APK_URL, "_blank", "noopener,noreferrer");
   };
 
   useEffect(() => {
@@ -260,11 +243,9 @@ export default function App() {
               className="bg-zinc-900 rounded-3xl border border-zinc-800 shadow-xl p-8 text-center min-h-[280px] flex flex-col items-center justify-start"
             >
               <f.icon size={42} className="mb-5 text-white" />
-
               <h3 className="font-semibold text-2xl mb-4 leading-snug">
                 {f.title}
               </h3>
-
               <p className="text-zinc-400 text-base leading-relaxed max-w-[260px]">
                 {f.desc}
               </p>
@@ -319,82 +300,31 @@ export default function App() {
       {/* FOOTER */}
       <footer id="about" className="border-t border-zinc-800 py-16">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          {/* Name */}
           <p className="text-zinc-300 text-lg mb-6">
             Made with ❤️ by{" "}
             <span className="font-semibold text-white">Cosmo Coder</span>{" "}
             <span className="text-zinc-500">(AKA Madhav Tiwari)</span>
           </p>
 
-          {/* Contact Buttons */}
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
-            {/* Email */}
             <a
               href="mailto:contact.madhavtiwari@gmail.com"
               className="inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-zinc-900 border border-zinc-800 hover:border-indigo-500 hover:bg-zinc-800 transition-all duration-300 group"
             >
-              <Mail
-                size={18}
-                className="text-zinc-400 group-hover:text-indigo-400 transition"
-              />
-              <span className="text-zinc-300 group-hover:text-white text-sm sm:text-base font-medium">
-                contact.madhavtiwari@gmail.com
-              </span>
+              <Mail size={18} />
+              <span>contact.madhavtiwari@gmail.com</span>
             </a>
 
-            {/* Portfolio */}
             <a
               href="https://madhavtiwari.xyz"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-zinc-900 border border-zinc-800 hover:border-purple-500 hover:bg-zinc-800 transition-all duration-300 group"
             >
-              <Globe
-                size={18}
-                className="text-zinc-400 group-hover:text-purple-400 transition"
-              />
-              <span className="text-zinc-300 group-hover:text-white text-sm sm:text-base font-medium">
-                madhavtiwari.xyz
-              </span>
+              <Globe size={18} />
+              <span>madhavtiwari.xyz</span>
             </a>
           </div>
-
-          {/* Social Icons */}
-          <div className="flex justify-center gap-6 mb-8">
-            {[
-              {
-                icon: Github,
-                href: "https://github.com/ermadhav",
-              },
-              {
-                icon: Linkedin,
-                href: "https://www.linkedin.com/in/ermadhav/",
-              },
-              {
-                icon: X,
-                href: "https://twitter.com/madhavtiwari24",
-              },
-              {
-                icon: Instagram,
-                href: "https://www.instagram.com/madhav.tiwari24/",
-              },
-            ].map((social, i) => (
-              <a
-                key={i}
-                href={social.href}
-                target="_blank"
-                rel="noreferrer"
-                className="w-12 h-12 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white hover:border-indigo-500 hover:bg-zinc-800 transition-all duration-300"
-              >
-                <social.icon size={22} />
-              </a>
-            ))}
-          </div>
-
-          {/* Tech Stack */}
-          <p className="text-sm text-zinc-500 tracking-wide">
-            Built with Expo • React Native • React Web
-          </p>
         </div>
       </footer>
     </div>
