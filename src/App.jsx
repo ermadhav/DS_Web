@@ -72,15 +72,15 @@ export default function App() {
   }, []);
 
   const screenshots = [
-    asset("screenshots/home.jpg"),
-    asset("screenshots/login.jpg"),
-    asset("screenshots/signup.jpg"),
-    asset("screenshots/share.jpg"),
-    asset("screenshots/stat1.jpg"),
-    asset("screenshots/stat2.jpg"),
-    asset("screenshots/setting.jpg"),
-    asset("screenshots/repo1.jpg"),
-    asset("screenshots/repo2.jpg"),
+    asset("screenshots/home.jpeg"),
+    asset("screenshots/login.jpeg"),
+    asset("screenshots/signup.jpeg"),
+    asset("screenshots/share.jpeg"),
+    asset("screenshots/stat1.jpeg"),
+    asset("screenshots/stat2.jpeg"),
+    asset("screenshots/setting.jpeg"),
+    asset("screenshots/repo1.jpeg"),
+    asset("screenshots/repo2.jpeg"),
   ];
 
   const scroll = (direction) => {
@@ -193,7 +193,7 @@ export default function App() {
         <motion.div className="flex justify-center">
           <div className="relative w-[240px] sm:w-[260px] h-[480px] sm:h-[520px] rounded-[36px] border border-zinc-700 bg-black shadow-2xl overflow-hidden">
             <img
-              src={asset("screenshots/home.jpg")}
+              src={asset("screenshots/home.jpeg")}
               onError={(e) => (e.currentTarget.src = asset("icon.png"))}
               className="w-full h-full object-contain"
             />
