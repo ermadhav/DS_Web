@@ -22,8 +22,7 @@ export default function App() {
   const [open, setOpen] = useState(false);
   const sliderRef = useRef(null);
 
-  const APK_URL =
-    "https://github.com/ermadhav/DS_Web/releases/download/v1.0.0/Dev_Streaks.apk";
+  const APK_URL = "/Dev_Streaks.apk";
 
   const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
 
