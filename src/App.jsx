@@ -319,7 +319,7 @@ export default function App() {
       {/* FOOTER */}
 <footer id="about" className="border-t border-zinc-800 py-16">
   <div className="max-w-4xl mx-auto px-6 text-center">
-    
+
     {/* Name */}
     <p className="text-zinc-300 text-lg mb-6">
       Made with ❤️ by{" "}
@@ -327,19 +327,39 @@ export default function App() {
       <span className="text-zinc-500">(AKA Madhav Tiwari)</span>
     </p>
 
-    {/* Email */}
-    <a
-      href="mailto:contact.madhavtiwari@gmail.com"
-      className="inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-zinc-900 border border-zinc-800 hover:border-indigo-500 hover:bg-zinc-800 transition-all duration-300 mb-8 group"
-    >
-      <Mail
-        size={18}
-        className="text-zinc-400 group-hover:text-indigo-400 transition"
-      />
-      <span className="text-zinc-300 group-hover:text-white text-sm sm:text-base font-medium">
-        contact.madhavtiwari@gmail.com
-      </span>
-    </a>
+    {/* Contact Buttons */}
+    <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
+      
+      {/* Email */}
+      <a
+        href="mailto:contact.madhavtiwari@gmail.com"
+        className="inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-zinc-900 border border-zinc-800 hover:border-indigo-500 hover:bg-zinc-800 transition-all duration-300 group"
+      >
+        <Mail
+          size={18}
+          className="text-zinc-400 group-hover:text-indigo-400 transition"
+        />
+        <span className="text-zinc-300 group-hover:text-white text-sm sm:text-base font-medium">
+          contact.madhavtiwari@gmail.com
+        </span>
+      </a>
+
+      {/* Portfolio */}
+      <a
+        href="https://madhavtiwari.xyz"
+        target="_blank"
+        rel="noreferrer"
+        className="inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-zinc-900 border border-zinc-800 hover:border-purple-500 hover:bg-zinc-800 transition-all duration-300 group"
+      >
+        <Globe
+          size={18}
+          className="text-zinc-400 group-hover:text-purple-400 transition"
+        />
+        <span className="text-zinc-300 group-hover:text-white text-sm sm:text-base font-medium">
+          madhavtiwari.xyz
+        </span>
+      </a>
+    </div>
 
     {/* Social Icons */}
     <div className="flex justify-center gap-6 mb-8">
