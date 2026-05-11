@@ -14,8 +14,8 @@ import {
   Code,
   Bell,
   Mail,
+  Globe,
 } from "lucide-react";
-import { Mail, Globe } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 export default function App() {
