@@ -28,8 +28,13 @@ export default function App() {
 
   // FIXED DOWNLOAD FUNCTION
   const downloadAPK = () => {
-    window.open(APK_URL, "_blank", "noopener,noreferrer");
-  };
+  const a = document.createElement("a");
+  a.href = APK_URL;
+  a.download = "Dev_Streaks.apk";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+};
 
   useEffect(() => {
     document.documentElement.style.overflowX = "hidden";
