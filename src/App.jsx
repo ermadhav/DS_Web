@@ -66,6 +66,8 @@ export default function App() {
     asset("screenshots/share.jpeg"),
     asset("screenshots/repo1.jpeg"),
     asset("screenshots/setting.jpeg"),
+    asset("screenshots/widget.jpeg"),
+
   ];
 
   const scroll = (direction) => {
@@ -202,61 +204,66 @@ export default function App() {
       </section>
 
       {/* FEATURES */}
-      <section id="features" className="max-w-7xl mx-auto px-6 py-20">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-14">
-          Features
-        </h2>
+<section id="features" className="max-w-7xl mx-auto px-6 py-20">
+  <h2 className="text-3xl md:text-4xl font-bold text-center mb-14">
+    Features
+  </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[
-            {
-              icon: Github,
-              title: "GitHub Tracking",
-              desc: "Track commit streaks, contribution heatmaps, and repositories.",
-            },
-            {
-              icon: Code,
-              title: "LeetCode Tracking",
-              desc: "Monitor solved problems, streaks, difficulty stats, and submissions.",
-            },
-            {
-              icon: Bell,
-              title: "Smart Reminders",
-              desc: "Set custom reminders from 12 PM to 11 PM with flexible intervals.",
-            },
-            {
-              icon: BarChart3,
-              title: "Analytics",
-              desc: "Get weekly insights and consistency analytics for your coding journey.",
-            },
-            {
-              icon: Share2,
-              title: "Profile Sharing",
-              desc: "Share your profile instantly using QR codes.",
-            },
-            {
-              icon: Smartphone,
-              title: "Mobile First",
-              desc: "Designed for a smooth and responsive mobile experience.",
-            },
-          ].map((f, i) => (
-            <motion.div
-              key={i}
-              whileHover={{ scale: 1.04, y: -5 }}
-              transition={{ duration: 0.2 }}
-              className="bg-zinc-900 rounded-3xl border border-zinc-800 shadow-xl p-8 text-center min-h-[280px] flex flex-col items-center justify-start"
-            >
-              <f.icon size={42} className="mb-5 text-white" />
-              <h3 className="font-semibold text-2xl mb-4 leading-snug">
-                {f.title}
-              </h3>
-              <p className="text-zinc-400 text-base leading-relaxed max-w-[260px]">
-                {f.desc}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+    {[
+      {
+        icon: Github,
+        title: "GitHub Tracking",
+        desc: "Track commit streaks, contribution heatmaps, and repositories.",
+      },
+      {
+        icon: Code,
+        title: "LeetCode Tracking",
+        desc: "Monitor solved problems, streaks, difficulty stats, and submissions.",
+      },
+      {
+        icon: Globe,
+        title: "Heatmap Widget",
+        desc: "Add GitHub & LeetCode heatmap widgets directly to your home screen.",
+      },
+      {
+        icon: Bell,
+        title: "Smart Reminders",
+        desc: "Set custom reminders from 12 PM to 11 PM with flexible intervals.",
+      },
+      {
+        icon: BarChart3,
+        title: "Analytics",
+        desc: "Get weekly insights and consistency analytics for your coding journey.",
+      },
+      {
+        icon: Share2,
+        title: "Profile Sharing",
+        desc: "Share your profile instantly using QR codes.",
+      },
+      {
+        icon: Smartphone,
+        title: "Mobile First",
+        desc: "Designed for a smooth and responsive mobile experience.",
+      },
+    ].map((f, i) => (
+      <motion.div
+        key={i}
+        whileHover={{ scale: 1.04, y: -5 }}
+        transition={{ duration: 0.2 }}
+        className="bg-zinc-900 rounded-3xl border border-zinc-800 shadow-xl p-8 text-center min-h-[280px] flex flex-col items-center justify-start"
+      >
+        <f.icon size={42} className="mb-5 text-white" />
+        <h3 className="font-semibold text-2xl mb-4 leading-snug">
+          {f.title}
+        </h3>
+        <p className="text-zinc-400 text-base leading-relaxed max-w-[260px]">
+          {f.desc}
+        </p>
+      </motion.div>
+    ))}
+  </div>
+</section>
 
       {/* PREVIEW */}
       <section id="preview" className="relative py-24">
@@ -280,12 +287,12 @@ export default function App() {
               <motion.div
                 key={i}
                 whileHover={{ scale: 1.04 }}
-                className="min-w-[220px] sm:min-w-[260px] bg-zinc-900 rounded-3xl border border-zinc-800 shadow-2xl overflow-hidden"
+                className="min-w-[240px] sm:min-w-[300px] bg-zinc-900 rounded-3xl border border-zinc-800 shadow-2xl overflow-hidden"
               >
                 <img
                   src={src}
                   onError={(e) => (e.currentTarget.src = asset("icon.png"))}
-                  className="w-full h-[420px] sm:h-[480px] object-contain bg-black"
+                  className="w-full h-[450px] sm:h-[520px] object-contain bg-black"
                   alt={`Screenshot ${i + 1}`}
                 />
               </motion.div>
