@@ -7,7 +7,10 @@ const GA4_ID = import.meta.env.VITE_GA4_MEASUREMENT_ID;
 const CLARITY_ID = import.meta.env.VITE_CLARITY_PROJECT_ID;
 
 // ── Google Analytics 4 ──────────────────────────────────────
+// Primary: loaded via <script> in index.html (hardcoded)
+// Fallback: dynamic loading via env var if not already present
 export function initGA4() {
+  if (window.gtag) return; // Already loaded from index.html
   if (!GA4_ID) return;
 
   const script = document.createElement("script");
@@ -27,7 +30,10 @@ export function initGA4() {
 }
 
 // ── Microsoft Clarity ───────────────────────────────────────
+// Primary: loaded via <script> in index.html (hardcoded)
+// Fallback: dynamic loading via env var if not already present
 export function initClarity() {
+  if (window.clarity) return; // Already loaded from index.html
   if (!CLARITY_ID) return;
 
   (function (c, l, a, r, i, t, y) {
@@ -64,9 +70,9 @@ export function trackAPKDownload(source = "unknown") {
     event_label: source,
     value: 1,
   });
-  if (window.gtag && GA4_ID) {
+  if (window.gtag) {
     window.gtag("event", "conversion", {
-      send_to: GA4_ID,
+      send_to: GA4_ID || "G-CJN92NDR4S",
       event_category: "download",
       event_label: "apk_download",
     });
