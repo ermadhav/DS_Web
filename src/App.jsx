@@ -72,15 +72,13 @@ export default function App() {
   }, []);
 
   const screenshots = [
-    asset("screenshots/home.jpeg"),
     asset("screenshots/login.jpeg"),
     asset("screenshots/signup.jpeg"),
-    asset("screenshots/share.jpeg"),
+    asset("screenshots/home.jpeg"),
     asset("screenshots/stat1.jpeg"),
-    asset("screenshots/stat2.jpeg"),
-    asset("screenshots/setting.jpeg"),
+    asset("screenshots/share.jpeg"),
     asset("screenshots/repo1.jpeg"),
-    asset("screenshots/repo2.jpeg"),
+    asset("screenshots/setting.jpeg"),
   ];
 
   const scroll = (direction) => {
