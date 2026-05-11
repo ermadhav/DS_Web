@@ -12,6 +12,7 @@ import {
   Linkedin,
   Instagram,
   Code,
+  Bell,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
@@ -19,14 +20,11 @@ export default function App() {
   const [open, setOpen] = useState(false);
   const sliderRef = useRef(null);
 
-  // APK URL
   const APK_URL =
     "https://github.com/ermadhav/DS_Web/releases/download/v1.0.0/Dev_Streaks.apk";
 
-  // Asset helper
   const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
 
-  // ✅ ANDROID DOWNLOAD FIX (IMPORTANT)
   const downloadAPK = async () => {
     try {
       const response = await fetch(APK_URL);
@@ -84,6 +82,7 @@ export default function App() {
   const scroll = (direction) => {
     if (!sliderRef.current) return;
     const amount = window.innerWidth < 640 ? 240 : 320;
+
     sliderRef.current.scrollBy({
       left: direction === "left" ? -amount : amount,
       behavior: "smooth",
@@ -92,36 +91,42 @@ export default function App() {
 
   return (
     <div className="min-h-screen w-screen overflow-x-hidden scroll-smooth bg-gradient-to-br from-black via-zinc-900 to-black text-white">
-
       {/* NAVBAR */}
       <nav className="fixed top-4 inset-x-0 z-50 px-4">
         <div className="max-w-7xl mx-auto backdrop-blur-xl bg-zinc-900/80 border border-zinc-800 rounded-2xl shadow-2xl">
           <div className="flex items-center justify-between px-5 h-16">
-
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg">
                 <img
                   src={asset("icon.png")}
                   onError={(e) => (e.currentTarget.src = asset("icon.png"))}
                   className="w-5 h-5"
+                  alt="Dev Streaks"
                 />
               </div>
+
               <span className="font-semibold tracking-wide text-lg">
                 Dev Streaks
               </span>
             </div>
 
             <div className="hidden md:flex items-center gap-8 text-sm text-zinc-300">
-              <a href="#features" className="hover:text-white transition">Features</a>
-              <a href="#preview" className="hover:text-white transition">Preview</a>
-              <a href="#about" className="hover:text-white transition">About</a>
+              <a href="#features" className="hover:text-white transition">
+                Features
+              </a>
+              <a href="#preview" className="hover:text-white transition">
+                Preview
+              </a>
+              <a href="#about" className="hover:text-white transition">
+                About
+              </a>
 
-              {/* ✅ FIXED DOWNLOAD */}
               <button
                 onClick={downloadAPK}
                 className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium hover:opacity-90 transition shadow-lg"
               >
-                <Download size={16} /> Download APK
+                <Download size={16} />
+                Download APK
               </button>
             </div>
 
@@ -138,16 +143,22 @@ export default function App() {
                 exit={{ opacity: 0, y: -10 }}
                 className="md:hidden px-5 pb-5 flex flex-col gap-4"
               >
-                <a href="#features" onClick={() => setOpen(false)}>Features</a>
-                <a href="#preview" onClick={() => setOpen(false)}>Preview</a>
-                <a href="#about" onClick={() => setOpen(false)}>About</a>
+                <a href="#features" onClick={() => setOpen(false)}>
+                  Features
+                </a>
+                <a href="#preview" onClick={() => setOpen(false)}>
+                  Preview
+                </a>
+                <a href="#about" onClick={() => setOpen(false)}>
+                  About
+                </a>
 
-                {/* ✅ FIXED DOWNLOAD */}
                 <button
                   onClick={downloadAPK}
                   className="flex justify-center items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium"
                 >
-                  <Download size={16} /> Download APK
+                  <Download size={16} />
+                  Download APK
                 </button>
               </motion.div>
             )}
@@ -167,7 +178,8 @@ export default function App() {
           </motion.h1>
 
           <p className="text-zinc-400 text-base sm:text-lg max-w-xl mb-8 mx-auto md:mx-0">
-            Track your GitHub commits and LeetCode streaks in one beautiful mobile experience.
+            Track your GitHub commits and LeetCode streaks in one beautiful
+            mobile experience.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 sm:justify-start">
@@ -178,12 +190,12 @@ export default function App() {
               View App
             </a>
 
-            {/* ✅ FIXED DOWNLOAD */}
             <button
               onClick={downloadAPK}
               className="px-6 py-3 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium transition flex items-center justify-center gap-2"
             >
-              <Download size={18} /> Download APK
+              <Download size={18} />
+              Download APK
             </button>
           </div>
         </div>
@@ -194,6 +206,7 @@ export default function App() {
               src={asset("screenshots/home.jpeg")}
               onError={(e) => (e.currentTarget.src = asset("icon.png"))}
               className="w-full h-full object-contain"
+              alt="App Preview"
             />
           </div>
         </motion.div>
@@ -203,13 +216,38 @@ export default function App() {
       <section id="features" className="max-w-7xl mx-auto px-6 py-20">
         <h2 className="text-3xl font-semibold text-center mb-14">Features</h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-6">
           {[
-            { icon: Github, title: "GitHub Tracking", desc: "Commit streaks, heatmaps, repositories." },
-            { icon: Code, title: "LeetCode Tracking", desc: "Solve streaks, difficulty stats, submissions." },
-            { icon: BarChart3, title: "Analytics", desc: "Weekly stats and consistency insights." },
-            { icon: Share2, title: "Profile Sharing", desc: "QR code sharing for profiles." },
-            { icon: Smartphone, title: "Mobile First", desc: "Optimized for mobile experience." },
+            {
+              icon: Github,
+              title: "GitHub Tracking",
+              desc: "Commit streaks, heatmaps, repositories.",
+            },
+            {
+              icon: Code,
+              title: "LeetCode Tracking",
+              desc: "Solve streaks, difficulty stats, submissions.",
+            },
+            {
+              icon: BarChart3,
+              title: "Analytics",
+              desc: "Weekly stats and consistency insights.",
+            },
+            {
+              icon: Share2,
+              title: "Profile Sharing",
+              desc: "QR code sharing for profiles.",
+            },
+            {
+              icon: Smartphone,
+              title: "Mobile First",
+              desc: "Optimized for mobile experience.",
+            },
+            {
+              icon: Bell,
+              title: "Smart Reminders",
+              desc: "Custom reminders from 12 PM–11 PM with 30m, 45m, 1h, or 2h intervals.",
+            },
           ].map((f, i) => (
             <motion.div
               key={i}
@@ -226,7 +264,9 @@ export default function App() {
 
       {/* PREVIEW */}
       <section id="preview" className="relative py-24">
-        <h2 className="text-3xl font-semibold text-center mb-10">Live App Preview</h2>
+        <h2 className="text-3xl font-semibold text-center mb-10">
+          Live App Preview
+        </h2>
 
         <div className="relative max-w-6xl mx-auto px-6">
           <button
@@ -250,6 +290,7 @@ export default function App() {
                   src={src}
                   onError={(e) => (e.currentTarget.src = asset("icon.png"))}
                   className="w-full h-[420px] sm:h-[480px] object-contain bg-black"
+                  alt={`Screenshot ${i + 1}`}
                 />
               </motion.div>
             ))}
@@ -267,14 +308,31 @@ export default function App() {
       {/* FOOTER */}
       <footer id="about" className="border-t border-zinc-800 py-14 text-center">
         <p className="text-zinc-400 mb-4">
-          Made with ❤️ by Cosmo Coder <span className="text-zinc-500">(AKA Madhav Tiwari)</span>
+          Made with ❤️ by Cosmo Coder{" "}
+          <span className="text-zinc-500">(AKA Madhav Tiwari)</span>
         </p>
 
         <div className="flex justify-center gap-6 mb-4">
-          <a href="https://github.com/ermadhav" target="_blank"><Github /></a>
-          <a href="https://www.linkedin.com/in/ermadhav/" target="_blank"><Linkedin /></a>
-          <a href="https://twitter.com/madhavtiwari24" target="_blank"><X /></a>
-          <a href="https://www.instagram.com/madhav.tiwari24/" target="_blank"><Instagram /></a>
+          <a href="https://github.com/ermadhav" target="_blank" rel="noreferrer">
+            <Github />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/ermadhav/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Linkedin />
+          </a>
+          <a href="https://twitter.com/madhavtiwari24" target="_blank" rel="noreferrer">
+            <X />
+          </a>
+          <a
+            href="https://www.instagram.com/madhav.tiwari24/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Instagram />
+          </a>
         </div>
 
         <p className="text-xs text-zinc-500">Expo • React Native • React Web</p>
